@@ -11,14 +11,16 @@ connectDB();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://mini-blog-frontend-phi.vercel.app",
+    ],
     credentials: true,
   })
 );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
