@@ -36,6 +36,7 @@ exports.registerUser = async (req, res) => {
         id: newUser._id,
         name: newUser.name,
         email: newUser.email,
+        role: newUser.role,
       },
     });
   } catch (err) {
@@ -44,8 +45,6 @@ exports.registerUser = async (req, res) => {
       .json({ success: false, msg: "Server error", error: err.message });
   }
 };
-
-
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -73,6 +72,7 @@ exports.loginUser = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
       },
     });
   } catch (err) {
@@ -82,6 +82,12 @@ exports.loginUser = async (req, res) => {
   }
 };
 
+exports.getLoggedUser = (req, res) => {
+  res.json({
+    success: true,
+    user: req.user,
+  });
+};
 
 exports.getAllUsers = async (req, res) => {
   try {
@@ -119,7 +125,6 @@ exports.updateUserRole = async (req, res) => {
       .json({ success: false, msg: "Server error", error: err.message });
   }
 };
-
 
 exports.deleteUser = async (req, res) => {
   const { userId } = req.params;
