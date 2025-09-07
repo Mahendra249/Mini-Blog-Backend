@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const auth = require("./middleware/authMiddleware");
 const connectDB = require("./config/db");
-
+const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 8000;
 
@@ -33,9 +33,8 @@ app.get("/api/protected", auth, (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello from Mini Auth Blog App!");
+  res.sendFile(path.join(__dirname, "index.html"));
 });
-
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
